@@ -4,7 +4,7 @@ import './project.css'
 const Project = (props) => {
   const [projectKeys, setProjectKeys] = useState([]);
   function fetchProjectKeysHandler() {
-    fetch('http://localhost:5000/getAvaialbleProjectKeys')
+    fetch('/getAvaialbleProjectKeys')
     .then(response => response.json())
   .then(data => 
   setProjectKeys(data));

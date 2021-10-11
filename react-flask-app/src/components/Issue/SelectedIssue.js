@@ -10,8 +10,8 @@ const SelectedIssue = (props) => {
   function FetchIssueHandler() {
     console.log(props.selectedProject)
     if (props.selectedProject != undefined) {
-    var url = 'http://localhost:5000/getIssueKeys/' + props.selectedProject
-    console.log('kurwa' + url)
+    var url = '/getIssueKeys/' + props.selectedProject
+    console.log('url is' + url)
     fetch(url)
     .then(response => response.json())
   .then(data => 

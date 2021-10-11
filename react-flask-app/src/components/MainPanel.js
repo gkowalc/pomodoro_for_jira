@@ -29,7 +29,7 @@ useEffect(() => {
       "minutes": SessionDuration
       }
       console.log(completedSessionData)
-    const response = await fetch('http://localhost:5000/updateTicket', {
+    const response = await fetch('/updateTicket', {
       method: 'POST',
       body:   JSON.stringify(completedSessionData),
       headers: {
