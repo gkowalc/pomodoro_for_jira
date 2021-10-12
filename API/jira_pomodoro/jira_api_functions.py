@@ -12,6 +12,15 @@ def addTimeToTicket(issuekey, time_minutes):
     time_sec = time_minutes * 60
     jira_connection_object.issue_worklog(issuekey, str(strObj), time_sec)
 
+def getAvailableProjectKeysAndNames():
+    keys_and_names = jira_connection_object.projects(included_archived=None)
+    project_keys_names_dict = {}
+    for i in keys_and_names:
+        project_keys_names_dict[i["key"]] = i["name"]
+
+    return project_keys_names_dict
+
+
 def getAvaialbleProjectName():
     jsonDIct = json.loads(json.dumps(jira_connection_object.projects(included_archived=None)))
     list_of_projects_names  = []
