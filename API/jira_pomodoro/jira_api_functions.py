@@ -1,9 +1,6 @@
-from atlassian import Jira
 import datetime
 import json
 from jira_object_wrapper import j
-
-# print(j.get_issue('OG-667'))
 
 def addTimeToTicket(issuekey, time_minutes):
     now = datetime.datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S.%f%z")
@@ -24,6 +21,8 @@ def getAvaialbleProjectName():
          list_of_projects_names.append(i["name"])
     return list_of_projects_names
 
+
+getAvaialbleProjectName()
 def getAllProjectIssueKeys(project_key):
     z = j.get_project_issuekey_all(project_key)
     y = json.dumps(z)
@@ -35,22 +34,17 @@ def getAllProjectIssueKeys(project_key):
     return list_of_issuekeys
 
 
-getAllProjectIssueKeys(str('PP'))
 
 def getAvaialbleProjectKey():
     z = j.projects(included_archived=None)
     y = json.dumps(z)
     jsonDIct = json.loads(y)
+    print(jsonDIct)
     list_of_projects = []
     for i in jsonDIct:
          list_of_projects.append(i["key"])
     return list_of_projects
 
-
-
-#for i in getAvaialbleProjectKey():
-        # z = j.get_project_issuekey_all(i)
-         # print(z)
 
 def getIssueSummaryForIssueKey(issuekey, summary="summary"):
     return (j.issue_field_value(issuekey, summary))
