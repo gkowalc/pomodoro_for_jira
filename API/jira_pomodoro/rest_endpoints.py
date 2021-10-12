@@ -3,8 +3,8 @@ from flask import Flask, redirect, url_for, request, jsonify
 from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 cors = CORS(app)
-import requests
 app.config['CORS_HEADERS'] = 'Content-Type'
+
 @app.route("/")
 @cross_origin()
 def home():
@@ -40,8 +40,6 @@ def updateTimeLog():
         issuekey = request.json['issuekey']
         time_minutes = request.json['minutes']
         minutesint = int(time_minutes)
-        print (issuekey, time_minutes)
-        print(type(issuekey), type(time_minutes))
         jira_api_functions.addTimeToTicket(str(issuekey), minutesint)
 
 
