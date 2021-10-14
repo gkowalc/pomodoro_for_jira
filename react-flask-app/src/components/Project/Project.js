@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import './project.css'
+import Options from './project_options/Project_options';
+
 const Project = (props) => {
   const [projectKeys, setProjectKeys] = useState([]);
   function fetchProjectKeysHandler() {
@@ -18,14 +20,7 @@ const Project = (props) => {
 
 
 
-    function Options({ options }) {
-        return (
-            options.map(option => 
-                        <option>                                   
-                        {option}
-                        </option>)
-                       );
-    }
+   
     
     function handleChange(event){
      // setSelectedOption(event.target.value)
@@ -37,7 +32,7 @@ const Project = (props) => {
       Project
     
       <select  onChange={handleChange} name="selectList" id="selectList" value={props.selectedProject}>
-      <Options options={projectKeys} />
+      <Options props={projectKeys} />
 </select>
   </div>
   );
