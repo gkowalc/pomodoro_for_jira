@@ -6,7 +6,7 @@ import Options from './project_options/Project_options';
 const Project = (props) => {
   const [projectKeys, setProjectKeys] = useState([]);
   function fetchProjectKeysHandler() {
-    fetch('/getAvaialbleProjectKeys')
+    fetch('/getAvaialbleProjectKeysNamesDictionary')
     .then(response => response.json())
   .then(data => 
   setProjectKeys(data));
@@ -24,14 +24,20 @@ const Project = (props) => {
     
     function handleChange(event){
      // setSelectedOption(event.target.value)
-     props.setSelectedProject(event.target.value)
+    const selectedValue = event.target.value
+    var key = Object.keys(projectKeys).filter(function(key) {return projectKeys[key] === selectedValue})[0];
+
+    console.log(selectedValue)
+    console.log(key)
+     props.setSelectedProject(key)
+ 
   }
   return (
     
     <div className='project'>
       Project
     
-      <select  onChange={handleChange} name="selectList" id="selectList" value={props.selectedProject}>
+      <select  onChange={handleChange} name="selectList" id="selectList" defaultvalue={props.selectedProject}>
       <Options props={projectKeys} />
 </select>
   </div>

@@ -9,7 +9,7 @@ import SelectedIssue from './Issue/SelectedIssue';
 import CompletedSessionCounter from './countdown/CompletedSessionsCounter/CompletedSessionCounter';
 const MainPanel = () => {
 const [numberofSessions, setNumberOfSessions] = useState(0)
-const [selectedProject, setSelectedProject] = useState()
+const [selectedProject, setSelectedProject] = useState('')
 const [SelectedOptionIssue, setSelectedIssue] = useState();
 const [SessionDuration, setSessioNDuration] = useState(25);
 
@@ -22,6 +22,10 @@ const [SessionDuration, setSessioNDuration] = useState(25);
 useEffect(() => {
    UpdateTicket()
   }, [numberofSessions]);
+
+  useEffect(() => {
+
+   }, [selectedProject]);
 
   async function UpdateTicket() {
     const completedSessionData = {
@@ -48,12 +52,12 @@ useEffect(() => {
       console.log(completedSessionData)
       
     }, [SelectedOptionIssue]);
-
+// <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={setNumberOfSessions}>
+// </CoutdownCompontent>
+      console.log("Selected project in mianplanel is " + selectedProject)
   return (
     <div className='mainpanelcss'>
       <TopMenu></TopMenu>
-      <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={setNumberOfSessions}>
-      </CoutdownCompontent>
       <Project selectedProject={selectedProject} setSelectedProject={setSelectedProject}></Project>
       <SelectedIssue selectedProject={selectedProject} selectedIssue={SelectedOptionIssue} setSelectedIssue={setSelectedIssue}> </SelectedIssue>
       <CompletedSessionCounter numberofSessions={numberofSessions}></CompletedSessionCounter>
