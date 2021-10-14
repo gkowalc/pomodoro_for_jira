@@ -5,8 +5,12 @@ import './selectedissue.css'
 const SelectedIssue = (props) => {
 
   const [IssueKeys, setIssueKeys] = useState([]);
-  // const [SelectedOptionIssue, setSelectedIssue] = useState();
+  const [IssueKeyPlusSummary, setIssueKeyPlusSummary] = useState([]);
+
+
   
+
+
   function FetchIssueHandler() {
     console.log(props.selectedProject)
     if (props.selectedProject != undefined) {
@@ -16,13 +20,34 @@ const SelectedIssue = (props) => {
     .then(response => response.json())
   .then(data => 
   setIssueKeys(data));
+
+  
+
 }
+
       };
+
+      function FetchSummaryForIssueKey() {
+          console.log(IssueKeys)
+          setIssueKeyPlusSummary([])
+          for (const i of IssueKeys) {
+
+            var url = '/getIssueSummary/' + i
+            console.log("issue summary path is" + url)
+            console.log(i)
+            fetch(url)
+            .then(response => response.json())     
+            .then(data =>  
+              setIssueKeyPlusSummary(oldArray => [...oldArray,  ([i + data])]));
+            
+          }
+      }
      
      useEffect(() => {
       console.log(props.selectedProject)
       if ( props.selectedProject != undefined) {
-        FetchIssueHandler();
+        FetchIssueHandler()
+        FetchSummaryForIssueKey();
         console.log('hello' + props.selectedProject) }
         }, [props.selectedProject]);
 
@@ -46,7 +71,7 @@ const SelectedIssue = (props) => {
     <div className='selectedissue'>
       Issue:
       <select  onChange={handleChange} name="selectIssueList" id="selectIssueList" value={props.SelectedOptionIssue}>
-      <Options options={IssueKeys} /></select></div>
+      <Options options={IssueKeyPlusSummary} /></select></div>
   );
   }
 
