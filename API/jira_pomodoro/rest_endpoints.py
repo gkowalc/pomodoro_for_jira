@@ -25,7 +25,6 @@ def getProjectKeysNamesDict():
 @app.route('/getIssueSummary/<issuekey>/', methods=['GET'])
 @cross_origin()
 def getIssueSummary(issuekey):
-
     return  jsonify(jira_api_functions.getIssueSummaryForIssueKey(issuekey)), 200
 
 @app.route('/getIssueKeys/<project_key>/', methods=['GET'])
