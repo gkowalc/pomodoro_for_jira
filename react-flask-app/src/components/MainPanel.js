@@ -9,7 +9,7 @@ import SelectedIssue from './Issue/SelectedIssue';
 import CompletedSessionCounter from './countdown/CompletedSessionsCounter/CompletedSessionCounter';
 const MainPanel = () => {
 const [numberofSessions, setNumberOfSessions] = useState(0)
-const [selectedProject, setSelectedProject] = useState('')
+const [selectedProject, setSelectedProject] = useState()
 const [SelectedOptionIssue, setSelectedIssue] = useState();
 const [SessionDuration, setSessioNDuration] = useState(25);
 

@@ -5,57 +5,46 @@ import './selectedissue.css'
 const SelectedIssue = (props) => {
 
   const [IssueKeys, setIssueKeys] = useState([]);
-  const [IssueKeyPlusSummary, setIssueKeyPlusSummary] = useState([]);
+  const [IssueKeyPlusSummary, setIssueKeyPlusSummary] = useState({});
 
-
-  
-
-
-  function FetchIssueHandler() {
-    console.log(props.selectedProject)
+  const  fetchIssueHandler = async () => {
     if (props.selectedProject != undefined) {
     var url = '/getIssueKeys/' + props.selectedProject
-    console.log('url is' + url)
-    fetch(url)
-    .then(response => response.json())
-  .then(data => 
-  setIssueKeys(data));
-
-  
-
+    const response = await fetch(url)
+    const json = await response.json()
+  setIssueKeys(json)
 }
-
       };
 
-      function FetchSummaryForIssueKey() {
-          console.log(IssueKeys)
-          setIssueKeyPlusSummary([])
+       const  fetchSummaryForIssueKey =  async () => {
+      
+          var temp_dict = {}
           for (const i of IssueKeys) {
-
             var url = '/getIssueSummary/' + i
-            console.log("issue summary path is" + url)
-            console.log(i)
-            fetch(url)
-            .then(response => response.json())     
-            .then(data =>  
-              setIssueKeyPlusSummary(oldArray => [...oldArray,  ([i + data])]));
-            
+            const response = await fetch(url)
+            const json = await response.json()
+             temp_dict[i] = json       
           }
+          setIssueKeyPlusSummary(temp_dict)
+         
       }
      
      useEffect(() => {
-      console.log(props.selectedProject)
       if ( props.selectedProject != undefined) {
-        FetchIssueHandler()
-        FetchSummaryForIssueKey();
-        console.log('hello' + props.selectedProject) }
+      fetchIssueHandler();
+}
         }, [props.selectedProject]);
 
-
+    useEffect(() => {
+  
+      setIssueKeyPlusSummary({});  
+      fetchSummaryForIssueKey();
+            }, [IssueKeys]);
+    
 
     function Options({ options }) {
         return (
-            options.map(option => 
+          Object.values(options).map(option => 
                         <option>                                   
                         {option}
                         </option>)
@@ -63,7 +52,9 @@ const SelectedIssue = (props) => {
     }
     
     function handleChange(event){
-      props.setSelectedIssue(event.target.value)
+      const selectedValue = event.target.value
+     var key = Object.keys(IssueKeys).filter(function(key) {return IssueKeyPlusSummary[key] === selectedValue})[0];
+      props.setSelectedIssue(selectedValue)
   }
 
   return (
@@ -71,7 +62,7 @@ const SelectedIssue = (props) => {
     <div className='selectedissue'>
       Issue:
       <select  onChange={handleChange} name="selectIssueList" id="selectIssueList" value={props.SelectedOptionIssue}>
-      <Options options={IssueKeyPlusSummary} /></select></div>
+            <Options options={IssueKeyPlusSummary} /></select></div>
   );
   }
 
