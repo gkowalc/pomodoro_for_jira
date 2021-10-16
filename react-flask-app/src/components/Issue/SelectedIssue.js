@@ -32,11 +32,12 @@ const SelectedIssue = (props) => {
      useEffect(() => {
       if ( props.selectedProject != undefined) {
       fetchIssueHandler();
-}
+}     props.setSelectedIssue()
         }, [props.selectedProject]);
 
+
+    
     useEffect(() => {
-  
       setIssueKeyPlusSummary({});  
       fetchSummaryForIssueKey();
             }, [IssueKeys]);
@@ -53,15 +54,16 @@ const SelectedIssue = (props) => {
     
     function handleChange(event){
       const selectedValue = event.target.value
-     var key = Object.keys(IssueKeys).filter(function(key) {return IssueKeyPlusSummary[key] === selectedValue})[0];
-      props.setSelectedIssue(selectedValue)
+     var key = Object.keys(IssueKeyPlusSummary).filter(function(key) {return IssueKeyPlusSummary[key] === selectedValue})[0];  
+     props.setSelectedIssue(key)
+
   }
 
   return (
     
     <div className='selectedissue'>
       Issue:
-      <select  onChange={handleChange} name="selectIssueList" id="selectIssueList" value={props.SelectedOptionIssue}>
+      <select  onChange={handleChange} name="selectIssueList" id="selectIssueList" value={IssueKeyPlusSummary[props.selectedIssue]}>
             <Options options={IssueKeyPlusSummary} /></select></div>
   );
   }

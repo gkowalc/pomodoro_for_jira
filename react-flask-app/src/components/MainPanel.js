@@ -32,7 +32,6 @@ useEffect(() => {
       "issuekey": SelectedOptionIssue, 
       "minutes": SessionDuration
       }
-      console.log(completedSessionData)
     const response = await fetch('/updateTicket', {
       method: 'POST',
       body:   JSON.stringify(completedSessionData),
@@ -40,8 +39,7 @@ useEffect(() => {
         'Content-Type': 'application/json'
       }
     });
-    //const data = await response.json();
-    // console.log(data);
+
   }
 
   useEffect(() => {
@@ -49,12 +47,11 @@ useEffect(() => {
       "issuekey": SelectedOptionIssue, 
       "minutes": SessionDuration
       }
-      console.log(completedSessionData)
+    
       
     }, [SelectedOptionIssue]);
 // <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={setNumberOfSessions}>
 // </CoutdownCompontent>
-      console.log("Selected project in mianplanel is " + selectedProject)
   return (
     <div className='mainpanelcss'>
       <TopMenu></TopMenu>

@@ -17,18 +17,11 @@ const Project = (props) => {
       useEffect(() => {
         fetchProjectKeysHandler();
         }, []);
-
-
-
-   
     
     function handleChange(event){
      // setSelectedOption(event.target.value)
     const selectedValue = event.target.value
     var key = Object.keys(projectKeys).filter(function(key) {return projectKeys[key] === selectedValue})[0];
-
-    console.log(selectedValue)
-    console.log(key)
      props.setSelectedProject(key)
  
   }
