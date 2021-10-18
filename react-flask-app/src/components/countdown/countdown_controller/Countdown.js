@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './countdown.css'
-import PomodoRoTimer from './pomodorotimer/pomodoroTimer';
+import PomodoRoTimer from '../pomodorotimer/pomodoroTimer';
+import Project from '../../Project/Project';
+import SelectedIssue from '../../Issue/SelectedIssue';
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
     const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 25)
@@ -25,7 +27,8 @@ const CoutdownCompontent = (props) => {
 
     }
 
-    const [paused, setPaused] = useState(cacheBooleanToString);
+    const [paused, setPaused] = useState(true);
+    const [startSession, setStartSession] = useState(false);
     const [sessionCompleted, setsSssionCompleted] = useState(false);
 
 
@@ -51,6 +54,48 @@ const CoutdownCompontent = (props) => {
       
   ;
     }
+
+    const makeStop = () => {setPaused(!paused)
+      localStorage.setItem('ispaused', !paused)
+      
+  ;
+    }
+   
+
+ 
+    
+ const StartSession = () => {
+  if ((props.SelectedOptionIssue != undefined) && (paused == false)) {
+    setStartSession(true)
+    return (<div>
+        <PomodoRoTimer propsdata={propsdata}></PomodoRoTimer>
+      <button onClick={makeStop}>
+          Stop current session
+          </button>
+    </div>)
+   } 
+   if (props.SelectedOptionIssue != undefined) {
+    setStartSession(true)
+    return (<div>
+       
+      <button onClick={makePause}>
+          Start Session
+          </button>
+    </div>)
+   } 
+
+   if (startSession == false) {
+    return (<div>
+      Select Project/issue to start the pomodoro session!
+    </div>)
+   }
+ }    
+ React.useEffect(() => {
+ console.log("hello")
+}, [props.SelectedOptionIssue, paused]);
+ const SessionStatus = () => {
+
+ }
   const propsdata = {hours, minutes, seconds, paused, sessionCompleted}
   
   //const dataToParent = {
@@ -61,10 +106,7 @@ const CoutdownCompontent = (props) => {
 
     return (
       <div>
-      <PomodoRoTimer propsdata={propsdata}></PomodoRoTimer>
-      <button onClick={makePause}>
-          {paused ? 'Resume' : 'Pause'}
-          </button>
+    <StartSession></StartSession>
        
       </div>
       

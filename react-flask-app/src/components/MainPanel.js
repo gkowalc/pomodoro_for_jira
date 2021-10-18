@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './MainPanel.css' 
-import CoutdownCompontent from './countdown/Countdown';
+import CoutdownCompontent from './countdown/countdown_controller/Countdown';
 import TopMenu from './HeaderMenu/TopMenu';
 import Project from './Project/Project';
 import SelectedIssue from './Issue/SelectedIssue'; 
@@ -50,11 +50,12 @@ useEffect(() => {
     
       
     }, [SelectedOptionIssue]);
-// <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={setNumberOfSessions}>
-// </CoutdownCompontent>
+// 
   return (
     <div className='mainpanelcss'>
       <TopMenu></TopMenu>
+      <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={setNumberOfSessions} selectedProject={selectedProject} SelectedOptionIssue={SelectedOptionIssue}>
+ </CoutdownCompontent>
       <Project selectedProject={selectedProject} setSelectedProject={setSelectedProject}></Project>
       <SelectedIssue selectedProject={selectedProject} selectedIssue={SelectedOptionIssue} setSelectedIssue={setSelectedIssue}> </SelectedIssue>
       <CompletedSessionCounter numberofSessions={numberofSessions}></CompletedSessionCounter>
