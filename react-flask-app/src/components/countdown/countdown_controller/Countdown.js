@@ -4,6 +4,8 @@ import './countdown.css'
 import PomodoRoTimer from '../pomodorotimer/pomodoroTimer';
 import Project from '../../Project/Project';
 import SelectedIssue from '../../Issue/SelectedIssue';
+
+import Modal from "react-modal";
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
     const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 25)
@@ -49,19 +51,28 @@ const CoutdownCompontent = (props) => {
       //}
     //}, [sessionCompleted]);
 
-    const makePause = () => {setPaused(!paused)
+    const makeStartSession = () => {setPaused(!paused)
       localStorage.setItem('ispaused', !paused)
       
   ;
     }
-
-    const makeStop = () => {setPaused(!paused)
+    const makeStop2 = () => {setPaused(!paused)
+      setIsOpen(!isOpen)
       localStorage.setItem('ispaused', !paused)
       
+  ;
+    }
+    const makeStop = () => {
+      setIsOpen(!isOpen)
+       
   ;
     }
    
+    const [isOpen, setIsOpen] = useState(false);
 
+    function toggleModal() {
+      setIsOpen(!isOpen);
+    }
  
     
  const StartSession = () => {
@@ -72,13 +83,20 @@ const CoutdownCompontent = (props) => {
       <button onClick={makeStop}>
           Stop current session
           </button>
+          <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="My dialog"
+        className="mymodal"
+        overlayClassName="myoverlay"
+        closeTimeoutMS={500}
+      > Hello</Modal>
     </div>)
    } 
    if (props.SelectedOptionIssue != undefined) {
     setStartSession(true)
     return (<div>
-       
-      <button onClick={makePause}>
+      <button onClick={makeStartSession}>
           Start Session
           </button>
     </div>)
@@ -107,8 +125,7 @@ const CoutdownCompontent = (props) => {
     return (
       <div>
     <StartSession></StartSession>
-       
-      </div>
+             </div>
       
 
     );
