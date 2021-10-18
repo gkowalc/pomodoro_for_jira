@@ -12,8 +12,8 @@ const CoutdownCompontent = (props) => {
     const breakDurationDefaulttplusCached = (localStorage.getItem('breakduration') || 5)
     const longBreakDurationDefaultplusCached = (localStorage.getItem('longBreakDuration') || 20)
     const frequencyLongBreakDefaultplusCached = (localStorage.getItem('frequencyLongBreak') || 4)
-    const hours = 0;
-    const minutes = sessionDurationFromSettingsComponent;
+    const hours = localStorage.getItem('hours') || 0;
+    const minutes = (localStorage.getItem('minutes') ||sessionDurationFromSettingsComponent);
     const seconds = (localStorage.getItem('seconds') || 0); 
 
     // updates pomodoro minutes value if changed by settings component
@@ -36,12 +36,7 @@ const CoutdownCompontent = (props) => {
 
 
     // saves times data to cache
-    React.useEffect(() => {
-      localStorage.setItem('hours', hours);
-      localStorage.setItem('minutes', minutes);
-      localStorage.setItem('seconds', seconds);
-    }, [hours, minutes, seconds]);
-    
+
   
  
     // counts  number of completed sessions
@@ -73,7 +68,13 @@ const CoutdownCompontent = (props) => {
     function toggleModal() {
       setIsOpen(!isOpen);
     }
- 
+    const propsdata = {hours, minutes, seconds, paused, sessionCompleted}
+    React.useEffect(() => {
+      localStorage.setItem('hours', hours);
+      localStorage.setItem('minutes', minutes);
+      localStorage.setItem('seconds', seconds);
+    }, [hours, minutes, seconds]);
+    
     
  const StartSession = () => {
   if ((props.SelectedOptionIssue != undefined) && (paused == false)) {
@@ -114,7 +115,6 @@ const CoutdownCompontent = (props) => {
  const SessionStatus = () => {
 
  }
-  const propsdata = {hours, minutes, seconds, paused, sessionCompleted}
   
   //const dataToParent = {
   //numberofSessionsCompelted: numberofSessions,
