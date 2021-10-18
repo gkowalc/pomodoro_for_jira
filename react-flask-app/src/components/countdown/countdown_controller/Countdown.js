@@ -46,26 +46,29 @@ const CoutdownCompontent = (props) => {
       //}
     //}, [sessionCompleted]);
 
+    const [isOpen, setIsOpen] = useState(false);
+
     const makeStartSession = () => {setPaused(!paused)
       localStorage.setItem('ispaused', !paused)
       
   ;
     }
-    const makeStop2 = () => {setPaused(!paused)
+    const closeModal = () => {setPaused(!paused)
+      console.log("trying to go back from nodal")
       setIsOpen(!isOpen)
       localStorage.setItem('ispaused', !paused)
       
   ;
     }
     const makeStop = () => {
+   
       setIsOpen(!isOpen)
        
   ;
     }
    
-    const [isOpen, setIsOpen] = useState(false);
-
     function toggleModal() {
+      console.log("trying to close nodal")
       setIsOpen(!isOpen);
     }
     const propsdata = {hours, minutes, seconds, paused, sessionCompleted}
@@ -87,11 +90,14 @@ const CoutdownCompontent = (props) => {
           <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
-        contentLabel="My dialog"
+        contentLabel="My dialog2"
         className="mymodal"
         overlayClassName="myoverlay"
         closeTimeoutMS={500}
-      > Hello</Modal>
+      >  
+      <button onClick={closeModal} >Are you sure? </button> <button onClick={makeStop} >go back to pomodoro</button>
+     
+      </Modal>
     </div>)
    } 
    if (props.SelectedOptionIssue != undefined) {
