@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './countdown.css'
-import PomodoRoTimer from '../pomodorotimer/pomodoroTimer';
+
 import Project from '../../Project/Project';
 import SelectedIssue from '../../Issue/SelectedIssue';
 import StartNewPomodoroView from './countdown_phases/StartNewPomodoroView';
 import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
 import Modal from "react-modal";
+import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
     const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 25)
@@ -36,9 +37,6 @@ const CoutdownCompontent = (props) => {
 
 
     // saves times data to cache
-
-  
- 
     // counts  number of completed sessions
     //useEffect(() => {
      // if (sessionCompleted) {
@@ -46,37 +44,27 @@ const CoutdownCompontent = (props) => {
       //}
     //}, [sessionCompleted]);
 
-    const [modalOpen, setModalOpen] = useState(false);
 
-    const makeStartSession = () => {setPaused(!paused)
-      localStorage.setItem('ispaused', !paused)
+   // const makeStartSession = () => {setPaused(!paused)
+    //  localStorage.setItem('ispaused', !paused)
       
-  ;
-    }
+ // ;
+  //  }
     const changePomodoroStatus = () => {
       //setPaused(!paused)
       //localStorage.setItem('ispaused', !paused)
       setStartPomodoro(!pomodoroRunning)
     }
-    const closeModal = () => {setPaused(!paused)
-      console.log("trying to go back from nodal")
-      setModalOpen(!modalOpen)
-      localStorage.setItem('ispaused', !paused)
-      
-  ;
-    }
-    const makeStop = () => {
-   
-      setModalOpen(!modalOpen)
-       
-  ;
+    const changePausedStatus = () => {
+      //setPaused(!paused)
+      //localStorage.setItem('ispaused', !paused)
+      setPaused(!paused)
+      localStorage.setItem('ispaused', paused)
     }
    
-    function toggleModal() {
-      console.log("trying to close nodal")
-      setModalOpen(!modalOpen);
-    }
-    const propsdata = {hours, minutes, seconds, paused, sessionCompleted}
+   
+  
+   
     //React.useEffect(() => {
     //  localStorage.setItem('hours', hours);
     //  localStorage.setItem('minutes', minutes);
@@ -93,33 +81,14 @@ const CoutdownCompontent = (props) => {
     </div>)
   } 
   
-  if ((props.SelectedOptionIssue != undefined) && (pomodoroRunning == true)) {
-
-    setStartPomodoro(true)
-    return (<div>
-        <PomodoRoTimer propsdata={propsdata}></PomodoRoTimer>
-      <button onClick={makeStop}>
-          Stop current session
-          </button>
-          <Modal
-        isOpen={modalOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog2"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >  
-      <button onClick={closeModal} >Are you sure? </button> <button onClick={makeStop} >go back to pomodoro</button>
-     
-      </Modal>
-    </div>)
+  if ( (pomodoroRunning == true)) {
+    const propsdata = {hours, minutes, seconds, changePomodoroStatus , sessionCompleted}
+    return(<PomodoroActiveSession timerdata={propsdata}></PomodoroActiveSession>)
    } 
    if (props.SelectedOptionIssue != undefined) {
-   
      return(
     <StartNewPomodoroView startPomodoro={changePomodoroStatus}></StartNewPomodoroView>
      )} 
-
    if (pomodoroRunning == false) {
      return (
     <ProjectIssueSelectorView></ProjectIssueSelectorView>
