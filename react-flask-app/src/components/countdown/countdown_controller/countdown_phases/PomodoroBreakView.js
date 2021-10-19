@@ -17,8 +17,9 @@ import Modal from "react-modal";
       }
       const lastSession = () => {
         setModalOpen(!modalOpen);
-        props.breakprop.setBreakStatus()
-        props.breakprop.changePomodoroStatus()
+        props.breakprop.setBreakStatus();
+        props.breakprop.changePomodoroStatus();
+        console.log("lastsession")
       }
 
        
@@ -37,7 +38,7 @@ import Modal from "react-modal";
       closeTimeoutMS={500}
     >  
     <button onClick={startAbreak} >Start a break </button> <button onClick={makeStop} >start new pomodoro</button>
-    <button>Void last session</button>
+    <button onClick={lastSession}>Void last session</button>
    
     </Modal>
       </div>)
