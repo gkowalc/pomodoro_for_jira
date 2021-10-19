@@ -11,7 +11,9 @@ const PomodoRoTimer = (props) => {
         
         if ((props.propsdata.paused) || props.propsdata.sessionCompleted) return;
         if (h === 0 && m === 0 && s === 0) {
-          props.propsdata.setsSessionCompleted(true)}
+          console.log("it is 0.0.0")
+          props.propsdata.setBreakStatus();
+        return}
         else if (m === 0 && s === 0) {
           setTime([h - 1, 59, 59]);
   

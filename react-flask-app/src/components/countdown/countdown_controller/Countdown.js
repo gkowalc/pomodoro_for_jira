@@ -18,6 +18,8 @@ const CoutdownCompontent = (props) => {
     const minutes = (localStorage.getItem('minutes') ||sessionDurationFromSettingsComponent);
     const seconds = (localStorage.getItem('seconds') || 0); 
 
+
+
 // updates pomodoro minutes value if changed by settings component
     React.useEffect(() => {
       const minutes = sessionDurationFromSettingsComponent;
@@ -55,11 +57,12 @@ const CoutdownCompontent = (props) => {
       //localStorage.setItem('ispaused', !paused)
       setStartPomodoro(!pomodoroRunning)
     }
-    const changePausedStatus = () => {
+    const setBreakStatus = () => {
       //setPaused(!paused)
       //localStorage.setItem('ispaused', !paused)
-      setPaused(!paused)
-      localStorage.setItem('ispaused', paused)
+      setsSessionCompleted(!sessionCompleted)
+      //setPaused(!paused)
+      //localStorage.setItem('ispaused', paused)
     }
    
    
@@ -73,7 +76,8 @@ const CoutdownCompontent = (props) => {
     
     
  const StartSession = () => {
-  if ((props.SelectedOptionIssue != undefined) && (paused == true) && ([hours, minutes, seconds] == 0)) 
+
+  if ( (sessionCompleted == true) && ([hours, minutes, seconds] == 0)) 
   {
     console.log("it is 0.0.0")
     return(<div>
@@ -82,7 +86,7 @@ const CoutdownCompontent = (props) => {
   } 
   
   if ( (pomodoroRunning == true)) {
-    const propsdata = {hours, minutes, seconds, changePomodoroStatus , sessionCompleted}
+    const propsdata = {hours, minutes, seconds, changePomodoroStatus , setBreakStatus}
     return(<PomodoroActiveSession timerdata={propsdata}></PomodoroActiveSession>)
    } 
    if (props.SelectedOptionIssue != undefined) {
@@ -96,7 +100,7 @@ const CoutdownCompontent = (props) => {
  }    
  React.useEffect(() => {
  console.log("hello")
-}, [props.SelectedOptionIssue, paused]);
+}, [props.SelectedOptionIssue, sessionCompleted]);
  const SessionStatus = () => {
 
  }
