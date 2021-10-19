@@ -10,6 +10,7 @@ import Modal from "react-modal";
 
 import PomodoroBreakView from './countdown_phases/PomodoroBreakView';
 import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
+import PomodoroBreakInProgress from './countdown_phases/PomodoroBreakInProgress';
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
     const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 25)
@@ -37,7 +38,8 @@ const CoutdownCompontent = (props) => {
     const [paused, setPaused] = useState(true);
     const [pomodoroRunning, setStartPomodoro] = useState(false);
     const [duringPomodoroBreak, setDuringPomodoroBreak] = useState(false);
-
+    const [breakTimerRunning, setBreakTimerRunning] = useState(false);
+    
 
 
     // saves times data to cache
@@ -54,9 +56,14 @@ const CoutdownCompontent = (props) => {
       
  // ;
   //  }
+    const startPomodoroBreak = () => {
+      setBreakTimerRunning(!breakTimerRunning)
+    }
+
     const changePomodoroStatus = () => {
       setStartPomodoro(!pomodoroRunning)
     }
+
     const setBreakStatus = () => {
       setDuringPomodoroBreak(!duringPomodoroBreak)
 
@@ -74,9 +81,20 @@ const CoutdownCompontent = (props) => {
     
  const StartSession = () => {
 
+  if ( (duringPomodoroBreak == true) && (breakTimerRunning == true)) 
+
+  { const  breakproplist = {startPomodoroBreak, setBreakStatus, changePomodoroStatus}
+  const minutes =  breakDurationDefaulttplusCached
+  const propsdata = {hours, minutes, seconds}
+  return(
+    <PomodoroBreakInProgress breakprop={breakproplist} timerdata={propsdata}></PomodoroBreakInProgress>)
+  } 
+  
   if ( (duringPomodoroBreak == true)) 
-  { const  breakproplist = {setBreakStatus, changePomodoroStatus}
-    return(
+
+  { const  breakproplist = {startPomodoroBreak, setBreakStatus, changePomodoroStatus}
+ 
+  return(
     <PomodoroBreakView breakprop={breakproplist}></PomodoroBreakView>)
   } 
   
@@ -95,7 +113,7 @@ const CoutdownCompontent = (props) => {
  }    
  React.useEffect(() => {
  console.log("hello")
-}, [props.SelectedOptionIssue, duringPomodoroBreak]);
+}, [props.SelectedOptionIssue, duringPomodoroBreak, breakTimerRunning]);
  const SessionStatus = () => {
 
  }

@@ -1,11 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Modal from "react-modal";
+import PomodoRoTimer from '../../pomodorotimer/pomodoroTimer';
   const PomodoroBreakView = (props) => {
     const [modalOpen, setModalOpen] = useState(true);
     const startAbreak = () => {
+        
+    
       setModalOpen(!modalOpen)
-      return(<div>Break started!</div>)
+      props.breakprop.startPomodoroBreak() 
+      
     }
     const makeStop = () => {
         setModalOpen(!modalOpen);
