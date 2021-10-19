@@ -10,7 +10,8 @@ const PomodoRoTimer = (props) => {
     const tick = () => {
         
         if ((props.propsdata.paused) || props.propsdata.sessionCompleted) return;
-        if (h === 0 && m === 0 && s === 0) props.propsdata.setsSssionCompleted(true);
+        if (h === 0 && m === 0 && s === 0) {
+          props.propsdata.setsSessionCompleted(true)}
         else if (m === 0 && s === 0) {
           setTime([h - 1, 59, 59]);
   

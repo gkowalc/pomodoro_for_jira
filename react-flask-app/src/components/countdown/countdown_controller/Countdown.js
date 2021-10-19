@@ -5,6 +5,7 @@ import PomodoRoTimer from '../pomodorotimer/pomodoroTimer';
 import Project from '../../Project/Project';
 import SelectedIssue from '../../Issue/SelectedIssue';
 
+import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
 import Modal from "react-modal";
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
@@ -16,7 +17,7 @@ const CoutdownCompontent = (props) => {
     const minutes = (localStorage.getItem('minutes') ||sessionDurationFromSettingsComponent);
     const seconds = (localStorage.getItem('seconds') || 0); 
 
-    // updates pomodoro minutes value if changed by settings component
+// updates pomodoro minutes value if changed by settings component
     React.useEffect(() => {
       const minutes = sessionDurationFromSettingsComponent;
     }, [sessionDurationFromSettingsComponent]);
@@ -28,10 +29,9 @@ const CoutdownCompontent = (props) => {
       }
 
     }
-
     const [paused, setPaused] = useState(true);
-    const [startSession, setStartSession] = useState(false);
-    const [sessionCompleted, setsSssionCompleted] = useState(false);
+    const [pomodoroRunning, setStartPomodoro] = useState(false);
+    const [sessionCompleted, setsSessionCompleted] = useState(false);
 
 
 
@@ -46,7 +46,7 @@ const CoutdownCompontent = (props) => {
       //}
     //}, [sessionCompleted]);
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const makeStartSession = () => {setPaused(!paused)
       localStorage.setItem('ispaused', !paused)
@@ -55,40 +55,49 @@ const CoutdownCompontent = (props) => {
     }
     const closeModal = () => {setPaused(!paused)
       console.log("trying to go back from nodal")
-      setIsOpen(!isOpen)
+      setModalOpen(!modalOpen)
       localStorage.setItem('ispaused', !paused)
       
   ;
     }
     const makeStop = () => {
    
-      setIsOpen(!isOpen)
+      setModalOpen(!modalOpen)
        
   ;
     }
    
     function toggleModal() {
       console.log("trying to close nodal")
-      setIsOpen(!isOpen);
+      setModalOpen(!modalOpen);
     }
     const propsdata = {hours, minutes, seconds, paused, sessionCompleted}
-    React.useEffect(() => {
-      localStorage.setItem('hours', hours);
-      localStorage.setItem('minutes', minutes);
-      localStorage.setItem('seconds', seconds);
-    }, [hours, minutes, seconds]);
+    //React.useEffect(() => {
+    //  localStorage.setItem('hours', hours);
+    //  localStorage.setItem('minutes', minutes);
+    //  localStorage.setItem('seconds', seconds);
+    //}, [hours, minutes, seconds]);
     
     
  const StartSession = () => {
-  if ((props.SelectedOptionIssue != undefined) && (paused == false)) {
-    setStartSession(true)
+  if ((props.SelectedOptionIssue != undefined) && (paused == true) && ([hours, minutes, seconds] == 0)) 
+  {
+    console.log("it is 0.0.0")
+    return(<div>
+      Time for a break!
+    </div>)
+  } 
+  
+  if ((props.SelectedOptionIssue != undefined) && (pomodoroRunning == true)) {
+
+    setStartPomodoro(true)
     return (<div>
         <PomodoRoTimer propsdata={propsdata}></PomodoRoTimer>
       <button onClick={makeStop}>
           Stop current session
           </button>
           <Modal
-        isOpen={isOpen}
+        isOpen={modalOpen}
         onRequestClose={toggleModal}
         contentLabel="My dialog2"
         className="mymodal"
@@ -101,7 +110,7 @@ const CoutdownCompontent = (props) => {
     </div>)
    } 
    if (props.SelectedOptionIssue != undefined) {
-    setStartSession(true)
+    setStartPomodoro(true)
     return (<div>
       <button onClick={makeStartSession}>
           Start Session
@@ -109,11 +118,10 @@ const CoutdownCompontent = (props) => {
     </div>)
    } 
 
-   if (startSession == false) {
-    return (<div>
-      Select Project/issue to start the pomodoro session!
-    </div>)
-   }
+   if (pomodoroRunning == false) {
+     return (
+    <ProjectIssueSelectorView></ProjectIssueSelectorView>
+    )}
  }    
  React.useEffect(() => {
  console.log("hello")
