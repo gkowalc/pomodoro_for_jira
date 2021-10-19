@@ -4,7 +4,7 @@ import './countdown.css'
 import PomodoRoTimer from '../pomodorotimer/pomodoroTimer';
 import Project from '../../Project/Project';
 import SelectedIssue from '../../Issue/SelectedIssue';
-
+import StartNewPomodoroView from './countdown_phases/StartNewPomodoroView';
 import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
 import Modal from "react-modal";
 const CoutdownCompontent = (props) => {
@@ -52,6 +52,11 @@ const CoutdownCompontent = (props) => {
       localStorage.setItem('ispaused', !paused)
       
   ;
+    }
+    const changePomodoroStatus = () => {
+      //setPaused(!paused)
+      //localStorage.setItem('ispaused', !paused)
+      setStartPomodoro(!pomodoroRunning)
     }
     const closeModal = () => {setPaused(!paused)
       console.log("trying to go back from nodal")
@@ -110,13 +115,10 @@ const CoutdownCompontent = (props) => {
     </div>)
    } 
    if (props.SelectedOptionIssue != undefined) {
-    setStartPomodoro(true)
-    return (<div>
-      <button onClick={makeStartSession}>
-          Start Session
-          </button>
-    </div>)
-   } 
+   
+     return(
+    <StartNewPomodoroView startPomodoro={changePomodoroStatus}></StartNewPomodoroView>
+     )} 
 
    if (pomodoroRunning == false) {
      return (
