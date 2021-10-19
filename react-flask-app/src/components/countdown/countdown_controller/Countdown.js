@@ -7,6 +7,8 @@ import SelectedIssue from '../../Issue/SelectedIssue';
 import StartNewPomodoroView from './countdown_phases/StartNewPomodoroView';
 import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
 import Modal from "react-modal";
+
+import PomodoroBreakView from './countdown_phases/PomodoroBreakView';
 import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
@@ -34,7 +36,7 @@ const CoutdownCompontent = (props) => {
     }
     const [paused, setPaused] = useState(true);
     const [pomodoroRunning, setStartPomodoro] = useState(false);
-    const [sessionCompleted, setsSessionCompleted] = useState(false);
+    const [duringPomodoroBreak, setDuringPomodoroBreak] = useState(false);
 
 
 
@@ -53,16 +55,11 @@ const CoutdownCompontent = (props) => {
  // ;
   //  }
     const changePomodoroStatus = () => {
-      //setPaused(!paused)
-      //localStorage.setItem('ispaused', !paused)
       setStartPomodoro(!pomodoroRunning)
     }
     const setBreakStatus = () => {
-      //setPaused(!paused)
-      //localStorage.setItem('ispaused', !paused)
-      setsSessionCompleted(!sessionCompleted)
-      //setPaused(!paused)
-      //localStorage.setItem('ispaused', paused)
+      setDuringPomodoroBreak(!duringPomodoroBreak)
+
     }
    
    
@@ -77,12 +74,10 @@ const CoutdownCompontent = (props) => {
     
  const StartSession = () => {
 
-  if ( (sessionCompleted == true) && ([hours, minutes, seconds] == 0)) 
-  {
-    console.log("it is 0.0.0")
-    return(<div>
-      Time for a break!
-    </div>)
+  if ( (duringPomodoroBreak == true)) 
+  { const  breakproplist = {setBreakStatus, changePomodoroStatus}
+    return(
+    <PomodoroBreakView breakprop={breakproplist}></PomodoroBreakView>)
   } 
   
   if ( (pomodoroRunning == true)) {
@@ -100,7 +95,7 @@ const CoutdownCompontent = (props) => {
  }    
  React.useEffect(() => {
  console.log("hello")
-}, [props.SelectedOptionIssue, sessionCompleted]);
+}, [props.SelectedOptionIssue, duringPomodoroBreak]);
  const SessionStatus = () => {
 
  }
