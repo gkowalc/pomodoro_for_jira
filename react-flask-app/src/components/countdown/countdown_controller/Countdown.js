@@ -14,7 +14,7 @@ import PomodoroBreakInProgress from './countdown_phases/PomodoroBreakInProgress'
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
     const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 25)
-    const breakDurationDefaulttplusCached = (localStorage.getItem('breakduration') || 5)
+    const breakDurationDefaulttplusCached = (localStorage.getItem('breakduration') || 1)
     const longBreakDurationDefaultplusCached = (localStorage.getItem('longBreakDuration') || 20)
     const frequencyLongBreakDefaultplusCached = (localStorage.getItem('frequencyLongBreak') || 4)
     const hours = localStorage.getItem('hours') || 0;
@@ -40,7 +40,7 @@ const CoutdownCompontent = (props) => {
     const [duringPomodoroBreak, setDuringPomodoroBreak] = useState(false);
     const [breakTimerRunning, setBreakTimerRunning] = useState(false);
     
-
+    const  [currentPomodoroState, setCurrentPomodoroState] = useState("StartNewPomodoroView");
 
     // saves times data to cache
     // counts  number of completed sessions
@@ -65,6 +65,7 @@ const CoutdownCompontent = (props) => {
     }
 
     const setBreakStatus = () => {
+      console.log("break status changed")
       setDuringPomodoroBreak(!duringPomodoroBreak)
 
     }
@@ -81,17 +82,30 @@ const CoutdownCompontent = (props) => {
     
  const StartSession = () => {
 
+  switch(currentPomodoroState == x) {
+  case (x== "StartNewPomodoroView"):
+    return (
+      <ProjectIssueSelectorView></ProjectIssueSelectorView>
+      )
+      
+
+  }
   if ( (duringPomodoroBreak == true) && (breakTimerRunning == true)) 
 
-  { const  breakproplist = {startPomodoroBreak, setBreakStatus, changePomodoroStatus}
+  { 
   const minutes =  breakDurationDefaulttplusCached
-  const propsdata = {hours, minutes, seconds}
+  const pomodoroTimerKiller = () => {
+    setBreakStatus();
+    startPomodoroBreak();  
+    changePomodoroStatus();
+  } 
+  const propsdata = {hours, minutes, seconds, breakTimerRunning, pomodoroTimerKiller  }
   return(
-    <PomodoroBreakInProgress breakprop={breakproplist} timerdata={propsdata}></PomodoroBreakInProgress>)
+    <PomodoroBreakInProgress timerdata={propsdata}></PomodoroBreakInProgress>)
   } 
   
   if ( (duringPomodoroBreak == true)) 
-
+         
   { const  breakproplist = {startPomodoroBreak, setBreakStatus, changePomodoroStatus}
  
   return(
@@ -99,7 +113,9 @@ const CoutdownCompontent = (props) => {
   } 
   
   if ( (pomodoroRunning == true)) {
-    const propsdata = {hours, minutes, seconds, changePomodoroStatus , setBreakStatus}
+    const pomodoroTimerKiller = setBreakStatus
+    const propsdata = {hours, minutes, seconds, changePomodoroStatus , pomodoroTimerKiller}
+    
     return(<PomodoroActiveSession timerdata={propsdata}></PomodoroActiveSession>)
    } 
    if (props.SelectedOptionIssue != undefined) {

@@ -5,14 +5,19 @@ import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
 
   const PomodoroBreakInProgress = (props) => {
    
-    const makeStop = () => {
+  
+    React.useEffect(() => {
+      console.log("changing pomdooro break status")
+     
+     }, [props.timerdata.breakTimerRunning]);
+  
       
 
-    }
+    
 
     return (<div>
-    <PomodoRoTimer propsdata={props.timerdata}></PomodoRoTimer>
-    <button onClick={makeStop}>
+    <PomodoRoTimer propsdata={props.timerdata} ></PomodoRoTimer>
+    <button>
         Stop current break</button></div>)
   }
 

@@ -5,8 +5,6 @@ import PomodoRoTimer from '../../pomodorotimer/pomodoroTimer';
   const PomodoroBreakView = (props) => {
     const [modalOpen, setModalOpen] = useState(true);
     const startAbreak = () => {
-        
-    
       setModalOpen(!modalOpen)
       props.breakprop.startPomodoroBreak() 
       
