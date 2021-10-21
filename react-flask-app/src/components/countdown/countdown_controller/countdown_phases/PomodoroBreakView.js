@@ -3,15 +3,17 @@ import { useState, useEffect } from 'react';
 import Modal from "react-modal";
 import PomodoRoTimer from '../../pomodorotimer/pomodoroTimer';
   const PomodoroBreakView = (props) => {
+   
     const [modalOpen, setModalOpen] = useState(true);
     const startAbreak = () => {
       setModalOpen(!modalOpen)
-      props.breakprop.startPomodoroBreak() 
+      props.changePomodoroViewState(props.sessionstates.nextStateBreakSession)
       
     }
     const makeStop = () => {
         setModalOpen(!modalOpen);
-        props.breakprop.setBreakStatus()
+        console.log("state is " + props.sessionstates.nextStatePomdooroSession)
+        props.changePomodoroViewState(props.sessionstates.nextStatePomdooroSession)
       }
       const toggleModal = () => {
         console.log("trying to close nodal")
@@ -19,9 +21,7 @@ import PomodoRoTimer from '../../pomodorotimer/pomodoroTimer';
       }
       const lastSession = () => {
         setModalOpen(!modalOpen);
-        props.breakprop.setBreakStatus();
-        props.breakprop.changePomodoroStatus();
-        console.log("lastsession")
+        props.changePomodoroViewState(props.sessionstates.nextStateLastStationkSession)
       }
 
        

@@ -7,6 +7,7 @@ import SelectedIssue from '../../Issue/SelectedIssue';
 import StartNewPomodoroView from './countdown_phases/StartNewPomodoroView';
 import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
 import Modal from "react-modal";
+import PomodoroBreakView from './countdown_phases/PomodoroBreakView';
 import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
 const StartSession = (props) => {
 
@@ -27,9 +28,6 @@ const StartSession = (props) => {
   
     case 'PomodoroActiveSession':
         const nextStateName3='PomodoroBreakView'
-        const pomodoroTimerKiller = ()  => {
-
-        }
           return(<PomodoroActiveSession 
             timerdata={props.props}
             props={props}
@@ -37,7 +35,19 @@ const StartSession = (props) => {
             nextStateName={nextStateName3}
             
           ></PomodoroActiveSession>)
-    }
+    case 'PomodoroBreakView':
+        const nextStatePomdooroSession='StartNewPomodoroView'
+        const nextStateBreakSession='PomodoroBreakInProgress'
+        const nextStateLastStationkSession='ProjectIssueSelectorView'
+        
+       const propslist = {nextStateLastStationkSession:'ProjectIssueSelectorView', nextStateBreakSession:'PomodoroBreakInProgress', nextStatePomdooroSession:'StartNewPomodoroView'}
+
+    return(
+  <PomodoroBreakView sessionstates={propslist} changePomodoroViewState={props.changePomodoroViewState}></PomodoroBreakView>)    
+    case 'PomodoroBreakInProgress':
+        return (<div>break!!!</div>)        
+
+}
 
     return <div>hello!</div>
    }    
