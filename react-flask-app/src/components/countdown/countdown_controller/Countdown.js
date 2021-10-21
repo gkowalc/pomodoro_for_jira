@@ -69,7 +69,7 @@ const CoutdownCompontent = (props) => {
  const timerdata = {hours, minutes, seconds}
   return (
       <div> 
-      <StartSession props={timerdata} changePomodoroStatus={changePomodoroStatus} currentPomodoroState={currentPomodoroState} changePomodoroViewState={changePomodoroViewState} SelectedOptionIssue={props.SelectedOptionIssue} ></StartSession>
+      <StartSession breakduration={breakDurationDefaulttplusCached} props={timerdata} changePomodoroStatus={changePomodoroStatus} currentPomodoroState={currentPomodoroState} changePomodoroViewState={changePomodoroViewState} SelectedOptionIssue={props.SelectedOptionIssue} ></StartSession>
     
              </div>
       
