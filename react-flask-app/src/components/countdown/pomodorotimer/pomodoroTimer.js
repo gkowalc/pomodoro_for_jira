@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 
 const PomodoRoTimer = (props) => {
    
-    const [[h, m, s], setTime] = useState([props.propsdata.hours, props.propsdata.minutes, props.propsdata.seconds]);
+    const [[h, m, s], setTime] = useState([props.props.hours, props.props.minutes, props.props.seconds]);
     console.log([h, m, s])
 
     const tick = () => {
         
-        if ((props.propsdata.paused) || props.propsdata.sessionCompleted) return;
+        if ((props.props.paused) || props.props.sessionCompleted) return;
         if (h == 0 && m == 0 && s == 0) {
           console.log("it is 0.0.0!!")
-          props.propsdata.pomodoroTimerKiller();
+          props.pomodoroTimerKiller();
         return }
         else if (m === 0 && s === 0) {
           setTime([h - 1, 59, 59]);
@@ -38,7 +38,7 @@ const PomodoRoTimer = (props) => {
    
       React.useEffect(() => {
         
-      }, [props.propsdata.hours, props.propsdata.minutes, props.propsdata.seconds]);
+      }, [props.props.hours, props.props.minutes, props.props.seconds]);
       
 
     return (
@@ -46,7 +46,7 @@ const PomodoRoTimer = (props) => {
         <p>{`${h.toString().padStart(2, '0')}:${m
           .toString()
           .padStart(2, '0')}:${s.toString().padStart(2, '0')}`}</p>
-        <div>{props.propsdata.sessionCompleted ? "Time's up!" : ''}</div>
+        <div>{props.props.sessionCompleted ? "Time's up!" : ''}</div>
       </div>
       
 

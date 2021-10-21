@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react';
 import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
 
   const PomodoroActiveSession = (props) => {
+    const pomodoroTimerKiller = (nextStateName)  => {
+      props.props.changePomodoroViewState(props.nextStateName)
+    }
+    
+
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
       props.timerdata.changePomodoroStatus();
@@ -18,7 +23,7 @@ import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
       setModalOpen(!modalOpen);
     }
     return (<div>
-      <PomodoRoTimer propsdata={props.timerdata}></PomodoRoTimer>
+      <PomodoRoTimer props={props.timerdata} pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
     <button onClick={makeStop}>
         Stop current session
         </button>
