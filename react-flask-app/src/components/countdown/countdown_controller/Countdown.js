@@ -69,7 +69,7 @@ const CoutdownCompontent = (props) => {
 
   return (
       <div>
-      <StartSession currentPomodoroState={currentPomodoroState} changePomodoroViewState={changePomodoroViewState} SelectedOptionIssue={props.SelectedOptionIssue} ></StartSession>
+      <StartSession changePomodoroStatus={changePomodoroStatus} currentPomodoroState={currentPomodoroState} changePomodoroViewState={changePomodoroViewState} SelectedOptionIssue={props.SelectedOptionIssue} ></StartSession>
     
              </div>
       
