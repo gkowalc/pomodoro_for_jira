@@ -31,10 +31,13 @@ const StartSession = (props) => {
     case 'PomodoroActiveSession':
         const nextStateName3='PomodoroBreakView'
           return(<PomodoroActiveSession 
+            setnumberofsessions = {props.setnumberofsessions}
             timerdata={props.props}
             props={props}
             changePomodoroViewState={props.changePomodoroViewState}
+            settings={props.settings}
             nextStateName={nextStateName3}
+
             
           ></PomodoroActiveSession>)
     case 'PomodoroBreakView':
@@ -49,7 +52,7 @@ const StartSession = (props) => {
     
   case 'PomodoroBreakInProgress':
   const nextSession='StartNewPomodoroView'
-        return (<PomodoroBreakInProgress changePomodoroViewState={props.changePomodoroViewState} nextStateName={nextSession} timerdata={props.breakduration} ></PomodoroBreakInProgress>)        
+        return (<PomodoroBreakInProgress settings={props.settings} changePomodoroViewState={props.changePomodoroViewState} nextStateName={nextSession} timerdata={props.breakduration} ></PomodoroBreakInProgress>)        
 
 }
 

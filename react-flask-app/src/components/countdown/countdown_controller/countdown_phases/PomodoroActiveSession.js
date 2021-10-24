@@ -5,13 +5,13 @@ import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
 
   const PomodoroActiveSession = (props) => {
     const pomodoroTimerKiller = (nextStateName)  => {
-      props.props.changePomodoroViewState(props.nextStateName)
+      props.changePomodoroViewState(props.nextStateName);
+      props.setnumberofsessions();
     }
-    
-
+  
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
-      props.timerdata.changePomodoroStatus();
+      props.changePomodoroStatus();
       setModalOpen(!modalOpen)
       //localStorage.setItem('ispaused', !paused);
     }
@@ -22,6 +22,7 @@ import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
       console.log("trying to close nodal")
       setModalOpen(!modalOpen);
     }
+    //const timerdataAdjustedForDefaultPomodoroDuration = {props.timerdata.hours, }
     return (<div>
       <PomodoRoTimer props={props.timerdata} pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
     <button onClick={makeStop}>

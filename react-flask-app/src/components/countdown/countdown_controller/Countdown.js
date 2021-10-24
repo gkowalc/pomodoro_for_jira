@@ -18,31 +18,39 @@ const CoutdownCompontent = (props) => {
     const longBreakDurationDefaultplusCached = (localStorage.getItem('longBreakDuration') || 20)
     const frequencyLongBreakDefaultplusCached = (localStorage.getItem('frequencyLongBreak') || 4)
     const hours = localStorage.getItem('hours') || 0;
+    //const minutes = (localStorage.getItem('minutes') || sessionDurationFromSettingsComponent);
     const minutes = (localStorage.getItem('minutes') || 0);
-    const seconds = (localStorage.getItem('seconds') || 5); 
-
+    
+    const seconds = (localStorage.getItem('seconds') || 3); 
 
 
 // updates pomodoro minutes value if changed by settings component
-    React.useEffect(() => {
-      const minutes = sessionDurationFromSettingsComponent;
-    }, [sessionDurationFromSettingsComponent]);
+  //  React.useEffect(() => {
+   //   const minutes = sessionDurationFromSettingsComponent;
+  //  }, [sessionDurationFromSettingsComponent]);
 
-    const cacheBooleanToString = () => {
-      switch(localStorage.getItem('ispaused')){
-        case "true":  return true
-        case "false": return false
-      }
+    //const cacheBooleanToString = () => {
+     // switch(localStorage.getItem('ispaused')){
+     //   case "true":  return true
+      //  case "false": return false
+     // }
 
-    }
+    //}
  
+    const [numberofsessions, setnumberofsessions] = useState(0);
+    const [numberofBreaks, setnumberofBreaks] = useState(0);
+    const [numberOfLongBreaks, setnumberOfLongBreaks] = useState(0);
+
     const [pomodoroRunning, setStartPomodoro] = useState(false);
-    const [duringPomodoroBreak, setDuringPomodoroBreak] = useState(false);
+  
     const [breakTimerRunning, setBreakTimerRunning] = useState(false);
   
     const  [currentPomodoroState, setCurrentPomodoroState] = useState("ProjectIssueSelectorView");
 
     const startPomodoroBreak = () => {
+      setBreakTimerRunning(!breakTimerRunning)
+    }
+    const incremenetPomodoroSession = () => {
       setBreakTimerRunning(!breakTimerRunning)
     }
 
@@ -53,26 +61,26 @@ const CoutdownCompontent = (props) => {
     const changePomodoroViewState = (nextTransition) => {
       setCurrentPomodoroState(nextTransition)
     }
-
-
-    const setBreakStatus = () => {
-      console.log("break status changed")
-      setDuringPomodoroBreak(!duringPomodoroBreak)
-
-    }
-  
-    
-    
- 
-
   
  const timerdata = {hours, minutes, seconds}
-  return (
+ const settings = {sessionDurationFromSettingsComponent, breakDurationDefaulttplusCached, longBreakDurationDefaultplusCached, frequencyLongBreakDefaultplusCached}
+ 
+ return (
       <div> 
-      <StartSession breakduration={breakDurationDefaulttplusCached} props={timerdata} changePomodoroStatus={changePomodoroStatus} currentPomodoroState={currentPomodoroState} changePomodoroViewState={changePomodoroViewState} SelectedOptionIssue={props.SelectedOptionIssue} ></StartSession>
-    
-             </div>
+      <StartSession 
+      numberofsessions={props.numberofSessions}
+      setnumberofsessions={props.setNumberOfSessions}
       
+      settings={settings}
+       breakduration={breakDurationDefaulttplusCached}
+       props={timerdata}
+       changePomodoroStatus={changePomodoroStatus}
+      currentPomodoroState={currentPomodoroState}
+      changePomodoroViewState={changePomodoroViewState} 
+      SelectedOptionIssue={props.SelectedOptionIssue} 
+      
+      ></StartSession>
+             </div>
 
     );
   };

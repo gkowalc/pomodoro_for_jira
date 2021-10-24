@@ -5,8 +5,8 @@ import CoutdownCompontent from './countdown/countdown_controller/Countdown';
 import TopMenu from './HeaderMenu/TopMenu';
 import Project from './Project/Project';
 import SelectedIssue from './Issue/SelectedIssue'; 
-
 import CompletedSessionCounter from './countdown/CompletedSessionsCounter/CompletedSessionCounter';
+
 const MainPanel = () => {
 const [numberofSessions, setNumberOfSessions] = useState(0)
 const [selectedProject, setSelectedProject] = useState()
@@ -42,6 +42,9 @@ useEffect(() => {
 
   }
 
+  const incrementNumberOfCompletedPomodoro = () => {
+    setNumberOfSessions(numberofSessions + 1)
+  }
   useEffect(() => {
     const completedSessionData = {
       "issuekey": SelectedOptionIssue, 
@@ -54,7 +57,7 @@ useEffect(() => {
   return (
     <div className='mainpanelcss'>
       <TopMenu></TopMenu>
-      <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={setNumberOfSessions} selectedProject={selectedProject} SelectedOptionIssue={SelectedOptionIssue}>
+      <CoutdownCompontent numberofSessions={numberofSessions} setNumberOfSessions={incrementNumberOfCompletedPomodoro} selectedProject={selectedProject} SelectedOptionIssue={SelectedOptionIssue}>
  </CoutdownCompontent>
       <Project selectedProject={selectedProject} setSelectedProject={setSelectedProject}></Project>
       <SelectedIssue selectedProject={selectedProject} selectedIssue={SelectedOptionIssue} setSelectedIssue={setSelectedIssue}> </SelectedIssue>
@@ -66,5 +69,3 @@ useEffect(() => {
 };
 
 export default MainPanel;
-// <img src='https://i.kym-cdn.com/entries/icons/original/000/028/021/work.jpg' width='400' ></img>
-     
