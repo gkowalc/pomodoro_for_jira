@@ -10,15 +10,8 @@ import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
     const pomodoroTimerKiller = (nextStateName)  => {
       props.changePomodoroViewState(props.nextStateName)
     }
-    React.useEffect(() => {
-      console.log("changing pomdooro break status")
-     
-     }, [props.timerdata.breakTimerRunning]);
-  
-      
-
     
-    const propslist = {seconds: 0, hours: 0, minutes: props.timerdata}
+    const propslist = {seconds: 0, hours: 0, minutes: props.settings.breakDurationDefaulttplusCached}
     return (<div>
     <PomodoRoTimer props={propslist}  pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
     <button onClick={stopCurrentSession}>

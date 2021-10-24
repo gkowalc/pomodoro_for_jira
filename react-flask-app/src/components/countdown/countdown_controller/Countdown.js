@@ -18,8 +18,8 @@ const CoutdownCompontent = (props) => {
     const longBreakDurationDefaultplusCached = (localStorage.getItem('longBreakDuration') || 20)
     const frequencyLongBreakDefaultplusCached = (localStorage.getItem('frequencyLongBreak') || 4)
     const hours = localStorage.getItem('hours') || 0;
-    //const minutes = (localStorage.getItem('minutes') || sessionDurationFromSettingsComponent);
-    const minutes = (localStorage.getItem('minutes') || 0);
+    const minutes = (localStorage.getItem('minutes') || sessionDurationFromSettingsComponent);
+    // const minutes = (localStorage.getItem('minutes') || 0);
     
     const seconds = (localStorage.getItem('seconds') || 3); 
 
@@ -50,6 +50,10 @@ const CoutdownCompontent = (props) => {
     const startPomodoroBreak = () => {
       setBreakTimerRunning(!breakTimerRunning)
     }
+    const setnumberofCompeltedBreaks = () => {
+      setnumberofBreaks(numberofBreaks +1)
+    }
+
     const incremenetPomodoroSession = () => {
       setBreakTimerRunning(!breakTimerRunning)
     }
