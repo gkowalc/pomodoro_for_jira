@@ -13,13 +13,13 @@ import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
 import PomodoroBreakInProgress from './countdown_phases/PomodoroBreakInProgress';
 const CoutdownCompontent = (props) => {
  // read values  from Settings component cache
-    const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 25)
+    const sessionDurationFromSettingsComponent = (localStorage.getItem('sessionDuration') || 2 )
     const breakDurationDefaulttplusCached = (localStorage.getItem('breakduration') || 1)
     const longBreakDurationDefaultplusCached = (localStorage.getItem('longBreakDuration') || 20)
-    const frequencyLongBreakDefaultplusCached = (localStorage.getItem('frequencyLongBreak') || 4)
+    const frequencyLongBreakDefaultplusCached = (localStorage.getItem('frequencyLongBreak') || 3)
     const hours = localStorage.getItem('hours') || 0;
-    const minutes = (localStorage.getItem('minutes') || sessionDurationFromSettingsComponent);
-    // const minutes = (localStorage.getItem('minutes') || 0);
+    // const minutes = (localStorage.getItem('minutes') || sessionDurationFromSettingsComponent);
+    const minutes = (localStorage.getItem('minutes') || 0);
     
     const seconds = (localStorage.getItem('seconds') || 3); 
 

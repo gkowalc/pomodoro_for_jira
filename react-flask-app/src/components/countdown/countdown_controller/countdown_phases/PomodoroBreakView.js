@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Modal from "react-modal";
-import PomodoRoTimer from '../../pomodorotimer/pomodoroTimer';
+import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
   const PomodoroBreakView = (props) => {
    
     const [modalOpen, setModalOpen] = useState(true);
+
     const startAbreak = () => {
       setModalOpen(!modalOpen)
       props.changePomodoroViewState(props.sessionstates.nextStateBreakSession)
@@ -12,23 +13,17 @@ import PomodoRoTimer from '../../pomodorotimer/pomodoroTimer';
     }
     const makeStop = () => {
         setModalOpen(!modalOpen);
-        console.log("state is " + props.sessionstates.nextStatePomdooroSession)
-        props.changePomodoroViewState(props.sessionstates.nextStatePomdooroSession)
+         props.changePomodoroViewState(props.sessionstates.nextStatePomdooroSession)
       }
       const toggleModal = () => {
-        console.log("trying to close nodal")
+    
         setModalOpen(!modalOpen);
       }
       const lastSession = () => {
         setModalOpen(!modalOpen);
+        CacheCleaner("all")
         props.changePomodoroViewState(props.sessionstates.nextStateLastStationkSession)
       }
-
-       
- React.useEffect(() => {
-    console.log("hell!o")
-   }, [ startAbreak]);
-   
    return (<div>
         Time for a break!
         <Modal

@@ -1,19 +1,22 @@
 import React from 'react';
 import Modal from "react-modal";
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
+import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
 
   const PomodoroActiveSession = (props) => {
     const pomodoroTimerKiller = (nextStateName)  => {
       props.changePomodoroViewState(props.nextStateName);
       props.setnumberofsessions();
-    }
+      const list = ["minutes", "seconds", "hours"]
+      CacheCleaner(list)
+         }
   
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
       props.changePomodoroStatus();
       setModalOpen(!modalOpen)
-      //localStorage.setItem('ispaused', !paused);
+  
     }
     const makeStop = () => {
       setModalOpen(!modalOpen);
@@ -22,8 +25,7 @@ import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
       console.log("trying to close nodal")
       setModalOpen(!modalOpen);
     }
-    //const timerdataAdjustedForDefaultPomodoroDuration = {props.timerdata.hours, }
-    return (<div>
+     return (<div>
       <PomodoRoTimer props={props.timerdata} pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
     <button onClick={makeStop}>
         Stop current session

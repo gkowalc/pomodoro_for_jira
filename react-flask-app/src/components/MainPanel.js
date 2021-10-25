@@ -6,18 +6,13 @@ import TopMenu from './HeaderMenu/TopMenu';
 import Project from './Project/Project';
 import SelectedIssue from './Issue/SelectedIssue'; 
 import CompletedSessionCounter from './countdown/CompletedSessionsCounter/CompletedSessionCounter';
-
+import CacheCleaner from '../helperfunctions/CacheCleaner';
 const MainPanel = () => {
+
 const [numberofSessions, setNumberOfSessions] = useState(0)
 const [selectedProject, setSelectedProject] = useState()
 const [SelectedOptionIssue, setSelectedIssue] = useState();
-const [SessionDuration, setSessioNDuration] = useState(25);
-
-// props for setting component
-// const [ sessionDuration, setSessionDuration ] = useState(25);
-//const [ breakDuration, setbreakDuration ] = useState(5);
-//const [ longBreakDuration, setLongBreakDuration ] = useState(25);
-//const [frequencyLongBreak, setfrequencyLongBreak ] = useState(4);
+const [SessionDuration, setSessionDuration] = useState();
 
 useEffect(() => {
    UpdateTicket()

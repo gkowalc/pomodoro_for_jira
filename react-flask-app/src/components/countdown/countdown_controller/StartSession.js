@@ -1,13 +1,7 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import './countdown.css'
-
-import Project from '../../Project/Project';
-import SelectedIssue from '../../Issue/SelectedIssue';
 import StartNewPomodoroView from './countdown_phases/StartNewPomodoroView';
 import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
-import Modal from "react-modal";
-
 import PomodoroBreakInProgress from './countdown_phases/PomodoroBreakInProgress';
 import PomodoroBreakView from './countdown_phases/PomodoroBreakView';
 import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
@@ -24,21 +18,18 @@ const StartSession = (props) => {
     case 'StartNewPomodoroView':
     const nextStateName2='PomodoroActiveSession'
     return( 
-        
        <StartNewPomodoroView nextStateName={nextStateName2} props={props}></StartNewPomodoroView>
          )
   
     case 'PomodoroActiveSession':
         const nextStateName3='PomodoroBreakView'
           return(<PomodoroActiveSession 
-            setnumberofsessions = {props.setnumberofsessions}
             timerdata={props.props}
             props={props}
             changePomodoroViewState={props.changePomodoroViewState}
             settings={props.settings}
+            setnumberofsessions = {props.setnumberofsessions}
             nextStateName={nextStateName3}
-
-            
           ></PomodoroActiveSession>)
     case 'PomodoroBreakView':
         const nextStatePomdooroSession='StartNewPomodoroView'
@@ -52,11 +43,18 @@ const StartSession = (props) => {
     
   case 'PomodoroBreakInProgress':
   const nextSession='StartNewPomodoroView'
-        return (<PomodoroBreakInProgress settings={props.settings} changePomodoroViewState={props.changePomodoroViewState} nextStateName={nextSession} timerdata={props.breakduration} ></PomodoroBreakInProgress>)        
+        return (<PomodoroBreakInProgress settings={props.settings} 
+          numberofsessions = {props.numberofsessions}
+          changePomodoroViewState={props.changePomodoroViewState} 
+          nextStateName={nextSession} 
+          settings={props.settings}
+          timerdata={props.breakduration} 
+          setnumberofsessions = {props.setnumberofsessions}
+          ></PomodoroBreakInProgress>)        
 
 }
 
-    return <div>hello!</div>
+    return <div>No state found in case/switch</div>
    }    
 
    
