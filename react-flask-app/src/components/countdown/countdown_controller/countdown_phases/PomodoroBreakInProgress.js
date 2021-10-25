@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
 import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
   const PomodoroBreakInProgress = (props) => {
@@ -9,9 +9,11 @@ import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
       props.changePomodoroViewState(props.nextStateName);
       CacheCleaner(["minutes", "seconds", "hours"])
     }
-     
+   
      if (props.numberofsessions % props.settings.frequencyLongBreakDefaultplusCached != 0){
-        const propslist = {seconds: 0, hours: 0, minutes: props.settings.breakDurationDefaulttplusCached}
+       
+      const propslist = {seconds: 0, hours: 0, minutes: props.settings.breakDurationDefaulttplusCached}
+      
       return (<div>
         <PomodoRoTimer props={propslist}  pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
         <button onClick={stopCurrentSession}>
@@ -26,7 +28,7 @@ import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
             Stop current Long break</button></div>)
 
     }
-   
+  
   }
 
 

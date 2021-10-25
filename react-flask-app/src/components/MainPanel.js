@@ -9,15 +9,20 @@ import CompletedSessionCounter from './countdown/CompletedSessionsCounter/Comple
 import CacheCleaner from '../helperfunctions/CacheCleaner';
 const MainPanel = () => {
 
-const [numberofSessions, setNumberOfSessions] = useState(0)
-const [selectedProject, setSelectedProject] = useState()
-const [SelectedOptionIssue, setSelectedIssue] = useState();
+const [numberofSessions, setNumberOfSessions] = useState(localStorage.getItem('numberofSessions'))
+const [selectedProject, setSelectedProject] = useState(localStorage.getItem('selectedProject'))
+const [SelectedOptionIssue, setSelectedIssue] = useState(localStorage.getItem('selectedOptionIssue'));
 const [SessionDuration, setSessionDuration] = useState();
 
 useEffect(() => {
    UpdateTicket()
   }, [numberofSessions]);
 
+  useEffect(() => {
+    localStorage.setItem("selectedProject", selectedProject)
+    localStorage.setItem('SelectedOptionIssue', SelectedOptionIssue)
+    localStorage.setItem('numberofSessions', numberofSessions)
+   }, [selectedProject, SelectedOptionIssue, numberofSessions]);
   useEffect(() => {
 
    }, [selectedProject]);

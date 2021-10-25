@@ -37,7 +37,7 @@ const CoutdownCompontent = (props) => {
 
     //}
  
-    const [numberofsessions, setnumberofsessions] = useState(0);
+    const [numberofsessions, setnumberofsessions] = useState();
     const [numberofBreaks, setnumberofBreaks] = useState(0);
     const [numberOfLongBreaks, setnumberOfLongBreaks] = useState(0);
 
@@ -45,7 +45,10 @@ const CoutdownCompontent = (props) => {
   
     const [breakTimerRunning, setBreakTimerRunning] = useState(false);
   
-    const  [currentPomodoroState, setCurrentPomodoroState] = useState("ProjectIssueSelectorView");
+    const  [currentPomodoroState, setCurrentPomodoroState] = useState(localStorage.getItem("currentPomodoroState") ||"ProjectIssueSelectorView");
+
+    useEffect(() => {
+      localStorage.setItem('currentPomodoroState', currentPomodoroState)}, [currentPomodoroState]);
 
     const startPomodoroBreak = () => {
       setBreakTimerRunning(!breakTimerRunning)
