@@ -1,4 +1,7 @@
 import React from 'react';
+
+import finishedSessionSound from '../../../../sounds/sound2.wav'
+import ReactAudioPlayer from 'react-audio-player';
   const StartNewPomodoroView = (props) => {
     const changePomodoroState = (nextStateName) => {
       props.props.changePomodoroViewState(props.nextStateName)
@@ -7,6 +10,11 @@ import React from 'react';
       <button onClick={changePomodoroState}>
           Start Session
           </button>
+          <ReactAudioPlayer
+  src={finishedSessionSound}
+  autoPlay={true}
+  controls={false}
+/>
     </div>)
   }
 

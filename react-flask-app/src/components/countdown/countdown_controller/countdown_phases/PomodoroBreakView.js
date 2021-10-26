@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Modal from "react-modal";
 import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
+import beginningSessionSound from '../../../../sounds/sound2.wav'
+import ReactAudioPlayer from 'react-audio-player';
   const PomodoroBreakView = (props) => {
    
     const [modalOpen, setModalOpen] = useState(true);
@@ -36,6 +38,11 @@ import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
     >  
     <button onClick={startAbreak} >Start a break </button> <button onClick={makeStop} >start new pomodoro</button>
     <button onClick={lastSession}>Void last session</button>
+    <ReactAudioPlayer
+  src={beginningSessionSound}
+  autoPlay={true}
+  controls={false}
+/>
    
     </Modal>
       </div>)

@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from "react-modal";
 import { useState} from 'react';
 import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
 import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
+import useSound from 'use-sound';
 
+import finishedSessionSound from '../../../../sounds/sound.wav'
+import ReactAudioPlayer from 'react-audio-player';
   const PomodoroActiveSession = (props) => {
+    const [issoundplayinh, setsoundplaying] = useState(false)
+    const onClickHandler = () => {
+    
+       return (<div></div>)
+  }
     const pomodoroTimerKiller = (nextStateName)  => {
+      setsoundplaying(!issoundplayinh);
       props.changePomodoroViewState(props.nextStateName);
       props.setnumberofsessions();
+      
       const list = ["minutes", "seconds", "hours"]
       CacheCleaner(list)
+      
          }
-  
+ 
+    
+
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
      
@@ -31,6 +44,11 @@ import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
     <button onClick={makeStop}>
         Stop current session
         </button>
+        <ReactAudioPlayer
+  src={finishedSessionSound}
+  autoPlay={true}
+  controls={false}
+/>
         <Modal
       isOpen={modalOpen}
       onRequestClose={toggleModal}

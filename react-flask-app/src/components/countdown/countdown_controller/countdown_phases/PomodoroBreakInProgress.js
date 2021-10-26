@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import PomodoRoTimer from "../../pomodorotimer/pomodoroTimer"
 import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
 import cloneDeep from 'lodash/cloneDeep';
+
+import finishedSessionSound from '../../../../sounds/sound.wav'
+import ReactAudioPlayer from 'react-audio-player';
   const PomodoroBreakInProgress = (props) => {
     const stopCurrentSession = (nextStateName) => {
       props.changePomodoroViewState(props.nextStateName)
@@ -23,7 +26,9 @@ import cloneDeep from 'lodash/cloneDeep';
         return (<div>
           <PomodoRoTimer props={propslist}  pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
           <button onClick={stopCurrentSession}>
-              Stop current short break</button></div>)
+              Stop current short break</button>
+             </div>)
+              
       //return (<div>
         //<PomodoRoTimer props={propslist}  pomodoroTimerKiller={pomodoroTimerKiller} ></PomodoRoTimer>
         //<button onClick={stopCurrentSession}>

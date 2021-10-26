@@ -5,6 +5,7 @@ import CoutdownCompontent from './countdown/countdown_controller/Countdown';
 import TopMenu from './HeaderMenu/TopMenu';
 import Project from './Project/Project';
 import SelectedIssue from './Issue/SelectedIssue'; 
+import useSound from 'use-sound';
 import CompletedSessionCounter from './countdown/CompletedSessionsCounter/CompletedSessionCounter';
 import CacheCleaner from '../helperfunctions/CacheCleaner';
 const MainPanel = () => {
