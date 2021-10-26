@@ -11,7 +11,7 @@ const MainPanel = () => {
 
 const [numberofSessions, setNumberOfSessions] = useState(localStorage.getItem('numberofSessions'))
 const [selectedProject, setSelectedProject] = useState(localStorage.getItem('selectedProject'))
-const [SelectedOptionIssue, setSelectedIssue] = useState(localStorage.getItem('selectedOptionIssue'));
+const [SelectedOptionIssue, setSelectedIssue] = useState(localStorage.getItem('SelectedOptionIssue'));
 const [SessionDuration, setSessionDuration] = useState();
 
 useEffect(() => {

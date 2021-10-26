@@ -30,15 +30,15 @@ const SelectedIssue = (props) => {
       }
      
      useEffect(() => {
-      if ( props.selectedProject != undefined) {
+      if ( props.selectedProject != "null") {
       fetchIssueHandler();
-}     props.setSelectedIssue()
+}     // props.setSelectedIssue()
         }, [props.selectedProject]);
 
 
     
     useEffect(() => {
-      setIssueKeyPlusSummary({});  
+     // setIssueKeyPlusSummary({});  
       fetchSummaryForIssueKey();
             }, [IssueKeys]);
     
@@ -53,10 +53,13 @@ const SelectedIssue = (props) => {
     }
     
     function handleChange(event){
-      const selectedValue = event.target.value
-     var key = Object.keys(IssueKeyPlusSummary).filter(function(key) {return IssueKeyPlusSummary[key] === selectedValue})[0];  
-     props.setSelectedIssue(key)
-
+      if (props.SelectedIssue == null) {
+        const selectedValue = event.target.value
+        var key = Object.keys(IssueKeyPlusSummary).filter(function(key) {return IssueKeyPlusSummary[key] === selectedValue})[0];  
+        props.setSelectedIssue(key)
+   
+      }
+   
   }
 
   return (
