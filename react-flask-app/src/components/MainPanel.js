@@ -9,7 +9,7 @@ import CompletedSessionCounter from './countdown/CompletedSessionsCounter/Comple
 import CacheCleaner from '../helperfunctions/CacheCleaner';
 const MainPanel = () => {
 
-const [numberofSessions, setNumberOfSessions] = useState(localStorage.getItem('numberofSessions'))
+const [numberofSessions, setNumberOfSessions] = useState(localStorage.getItem('numberofSessions') || 0)
 const [selectedProject, setSelectedProject] = useState(localStorage.getItem('selectedProject'))
 const [SelectedOptionIssue, setSelectedIssue] = useState(localStorage.getItem('SelectedOptionIssue'));
 const [SessionDuration, setSessionDuration] = useState();
@@ -43,7 +43,7 @@ useEffect(() => {
   }
 
   const incrementNumberOfCompletedPomodoro = () => {
-    setNumberOfSessions(numberofSessions + 1)
+    setNumberOfSessions(parseInt(numberofSessions) + 1)
   }
   useEffect(() => {
     const completedSessionData = {

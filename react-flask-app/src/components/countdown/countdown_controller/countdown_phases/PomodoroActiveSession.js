@@ -14,8 +14,9 @@ import CacheCleaner from '../../../../helperfunctions/CacheCleaner';
   
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
-      props.changePomodoroStatus();
+     
       setModalOpen(!modalOpen)
+      props.changePomodoroViewState(props.nextStateName);
   
     }
     const makeStop = () => {
