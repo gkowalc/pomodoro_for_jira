@@ -7,7 +7,7 @@ import SelectedIssue from '../../Issue/SelectedIssue';
 import StartNewPomodoroView from './countdown_phases/StartNewPomodoroView';
 import ProjectIssueSelectorView from './countdown_phases/InitialStateSelectProject';
 import Modal from "react-modal";
-
+import UpdateIssueTimelog from '../../../helperfunctions/UpdateIssueTimelog';
 import PomodoroBreakView from './countdown_phases/PomodoroBreakView';
 import PomodoroActiveSession from './countdown_phases/PomodoroActiveSession';
 import PomodoroBreakInProgress from './countdown_phases/PomodoroBreakInProgress';
@@ -87,6 +87,7 @@ const CoutdownCompontent = (props) => {
       SelectedOptionIssue={props.SelectedOptionIssue} 
       
       ></StartSession>
+      <UpdateIssueTimelog SessionDuration = {sessionDurationFromSettingsComponent } SelectedOptionIssue={props.SelectedOptionIssue}   numberofSessions={props.numberofSessions} />
              </div>
 
     );
